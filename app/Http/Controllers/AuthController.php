@@ -11,7 +11,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function login_view() {
+    public function authview() {
         return view('auth.template');
     }
 }

@@ -9,11 +9,11 @@
       
           <form action="../../index2.html" method="post">
             <div class="form-group has-feedback">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" class="form-control" v-model="email" placeholder="Email">
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" v-model="password" placeholder="Password">
               <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -45,6 +45,7 @@
           <router-link to="/forgot-password" class="text-center">I forgot my password</router-link> <br/>
           <!-- a href="register.html" class="text-center">Register a new membership</a -->
           <router-link to="/auth/register" class="text-center">Register a new membership</router-link>
+          <router-link to="/mustloggedin" class="text-center">Wajib login</router-link>
       
         </div>
         <!-- /.login-box-body -->

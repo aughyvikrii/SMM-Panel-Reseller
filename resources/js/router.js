@@ -8,6 +8,7 @@ import Example from './components/ExampleComponent.vue'
 import LoginView from './pages/Login.vue'
 import RegisterView from './pages/Register.vue'
 import ForgotPassword from './pages/ForgotPassword.vue'
+import MustLoggedIn from './pages/MustLoggedIn'
 
 // Routes
 const routes = [
@@ -30,6 +31,11 @@ const routes = [
     path : '/forgot-password',
     name : 'ForgotPassword',
     component : ForgotPassword
+  },
+  {
+    path : 'mustLoggedIn',
+    name : 'MustLoggedIn',
+    component : MustLoggedIn
   }
 ]
 
