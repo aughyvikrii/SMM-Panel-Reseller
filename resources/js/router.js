@@ -5,6 +5,9 @@ Vue.use(VueRouter)
 
 // Pages
 import Example from './components/ExampleComponent.vue'
+import LoginView from './pages/Login.vue'
+import RegisterView from './pages/Register.vue'
+import ForgotPassword from './pages/ForgotPassword.vue'
 
 // Routes
 const routes = [
@@ -12,6 +15,21 @@ const routes = [
     path: '/',
     name: 'home',
     component: Example
+  },
+  {
+    path : '/auth/login',
+    name : 'Login',
+    component: LoginView
+  },
+  {
+    path : '/auth/register',
+    name : 'Register',
+    component : RegisterView
+  },
+  {
+    path : '/forgot-password',
+    name : 'ForgotPassword',
+    component : ForgotPassword
   }
 ]
 

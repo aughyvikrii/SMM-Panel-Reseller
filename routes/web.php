@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any','.*');
+Route::group(['middleware' => 'isLogin:false'],function(){
+    Route::group(['prefix' => 'auth'],function(){
+        Route::get('login','AuthController@login_view');
+    });
+});
+
+Route::group(['middleware' => 'isLogin:true'],function(){
+    Route::get('/{any}', function () {
+        return view('app');
+    })->where('any','.*');
+});
