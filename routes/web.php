@@ -16,15 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'isLogin:false'],function(){
     Route::group(['prefix' => 'auth'],function(){
         Route::get('login','AuthController@authview');
+        Route::post('login','AuthController@loginProcess');
+
         Route::get('register','AuthController@authview');
     });
     Route::get('forgot-password','AuthController@authview');
 });
 
 Route::group(['middleware' => 'isLogin:true'],function(){
-    Route::get('mustloggedin',function(){
-        dd("AWA");
-    });
+    // Route::get('mustloggedin',function(){
+    //     dd("AWA");
+    // });
     Route::get('/{any}', function () {
         return view('app');
     })->where('any','.*');

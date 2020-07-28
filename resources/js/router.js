@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from './store'
 
 Vue.use(VueRouter)
 
@@ -8,7 +9,7 @@ import Example from './components/ExampleComponent.vue'
 import LoginView from './pages/Login.vue'
 import RegisterView from './pages/Register.vue'
 import ForgotPassword from './pages/ForgotPassword.vue'
-import MustLoggedIn from './pages/MustLoggedIn'
+import MustLoggedIn from './pages/MustLoggedIn.vue'
 
 // Routes
 const routes = [
@@ -33,9 +34,12 @@ const routes = [
     component : ForgotPassword
   },
   {
-    path : 'mustLoggedIn',
+    path : '/mustloggedin',
     name : 'MustLoggedIn',
-    component : MustLoggedIn
+    component : MustLoggedIn,
+    meta : {
+      requiresAuth : true
+    }
   }
 ]
 
@@ -43,6 +47,18 @@ const router = new VueRouter({
   history: true,
   mode: 'history',
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/404')
+  } else {
+    next()
+  }
 })
 
 export default router

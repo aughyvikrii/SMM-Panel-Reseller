@@ -23,6 +23,7 @@ import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
 import router from './router'
+import store from './store'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,5 +39,6 @@ Vue.component('index', Index)
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(Index)
 });
