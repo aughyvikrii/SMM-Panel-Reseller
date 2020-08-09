@@ -15,11 +15,11 @@
                 </div>
 
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" v-model="email" placeholder="Email" />
+                    <input type="email" class="form-control" v-model="email" placeholder="Email" required/>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" v-model="password" placeholder="Password" />
+                    <input type="password" class="form-control" v-model="password" placeholder="Password" required/>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
@@ -32,7 +32,14 @@
               </div -->
                     <!-- /.col -->
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" :disabled="loginprocess == 1">
+                        <font v-if="loginprocess == 1">
+                            <i class="fa fa-spinner fa-spin"></i>  Proses Login ....
+                        </font>
+                        <font v-else-if="loginprocess == 0">
+                            Login
+                        </font>
+                        </button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -64,18 +71,24 @@ export default {
         email: '',
         password: '',
         message : '',
-        errors : ''
+        errors : '',
+        loginprocess : 0
       }
     },
     methods: {
       login: function() {
-        this.message = ''
+        this.message = '';
+        this.loginprocess = 1;
         let email = this.email;
         let password = this.password;
         this.$store
           .dispatch('login', {email,password} )
-          .then( (res) => this.$router.push('/') )
+          .then( (res) => {
+              this.loginprocess = 0;
+              this.$router.push('/')
+          })
           .catch( (err) => {
+              this.loginprocess = 0;
               var message = err.response.data.message
               var errors = err.response.data.errors
 

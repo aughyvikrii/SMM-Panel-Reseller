@@ -2021,13 +2021,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       email: '',
       password: '',
       message: '',
-      errors: ''
+      errors: '',
+      loginprocess: 0
     };
   },
   methods: {
@@ -2035,14 +2043,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.message = '';
+      this.loginprocess = 1;
       var email = this.email;
       var password = this.password;
       this.$store.dispatch('login', {
         email: email,
         password: password
       }).then(function (res) {
-        return _this.$router.push('/');
+        _this.loginprocess = 0;
+
+        _this.$router.push('/');
       })["catch"](function (err) {
+        _this.loginprocess = 0;
         var message = err.response.data.message;
         var errors = err.response.data.errors;
 
@@ -37893,7 +37905,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "email", placeholder: "Email" },
+                attrs: { type: "email", placeholder: "Email", required: "" },
                 domProps: { value: _vm.email },
                 on: {
                   input: function($event) {
@@ -37922,7 +37934,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "password", placeholder: "Password" },
+                attrs: {
+                  type: "password",
+                  placeholder: "Password",
+                  required: ""
+                },
                 domProps: { value: _vm.password },
                 on: {
                   input: function($event) {
@@ -37939,11 +37955,36 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block btn-flat",
+                    attrs: { type: "submit", disabled: _vm.loginprocess == 1 }
+                  },
+                  [
+                    _vm.loginprocess == 1
+                      ? _c("font", [
+                          _c("i", { staticClass: "fa fa-spinner fa-spin" }),
+                          _vm._v("  Proses Login ....\n                    ")
+                        ])
+                      : _vm.loginprocess == 0
+                      ? _c("font", [
+                          _vm._v(
+                            "\n                        Login\n                    "
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ])
+            ])
           ]
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "router-link",
@@ -37980,23 +38021,6 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "../../index2.html" } }, [
         _c("b", [_vm._v("Admin")]),
         _vm._v("LTE")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block btn-flat",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Sign In")]
-        )
       ])
     ])
   },

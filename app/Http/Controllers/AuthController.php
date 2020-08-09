@@ -36,6 +36,8 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+        sleep(5);
+
         if( $validate->fails() ) {
             return response()->json([
                 'message' => 'Invalid input!',
